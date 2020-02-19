@@ -1,0 +1,20 @@
+mybatis:
+  config-location: classpath:mybatis/mybatis.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+server:
+  port: 8080
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/AlphaOJ?serverTimezone=GMT%2B8&characterEncoding=utf-8
+    username: root
+  mvc:
+    view:
+      prefix: '"/templates/"'
+      suffix: '".html"'
+  resources:
+    static-locations: classpath:/static/,classpath:/resources/static/
+  thymeleaf:
+    cache: false

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>题目列表</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+
+            <div class="navbar-header">
+                <button class="navbar-toggle" data-toggle="collapse" data-target="#res-nav">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="navbar-brand"><strong>AlphaOJ</strong></a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="res-nav">
+                <form action="" class="navbar-form navbar-left">
+                    <label>
+                        <input type="text" placeholder="输入搜索内容" class="form-control">
+                    </label>
+                    <button type="submit">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </form>
+                <!--            <div th:include="header::#head2"></div>-->
+                <div class="navbar-right">
+                    <ul class="nav navbar-nav">
+                        <li><a th:text="${session.user}"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <p><br><br><br><br><br><br><br><br><h2>题目列表ProblemList</h2><br><br></p>
+
+        <div class="col-sm-10">
+            <ul class="list-group">
+                <li class="list-group-item" th:each="questionInfo:${questionInfos}">
+                    题目：<a th:text="${questionInfo.question}" th:href="@{'/oj/'+${questionInfo.id}}"></a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <div align="center">
+        <a align="center" th:href="@{'/quit'}"><button type=button class="btn btn-default login ">退出登录</button></a>
+        <a th:href="@{'/record'}"><button type=button class="btn btn-default login ">查看记录</button></a>
+    </div>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+
+</body>
+</html>

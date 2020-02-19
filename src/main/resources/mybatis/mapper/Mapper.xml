@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.msq.weboj.dao.Access">
+    <insert id="insertUser" parameterType="cn.msq.weboj.object.User">
+        INSERT INTO user(username, password)
+        VALUES (#{username},#{password})
+    </insert>
+
+    <select id="selectUserByName" resultType="cn.msq.weboj.object.User" parameterType="java.lang.String">
+        SELECT uId,username,password
+        FROM user
+        WHERE username=#{0}
+    </select>
+
+    <select id="getAllQuestionInfoPath" resultType="cn.msq.weboj.object.Path">
+        SELECT id,questionPath,patternPath
+        FROM path
+        ORDER BY id
+    </select>
+    <select id="getQuestionInfoPathById" parameterType="java.lang.Integer"
+            resultType="cn.msq.weboj.object.Path">
+        SELECT id,questionPath,patternPath
+        FROM path
+        WHERE id=#{0}
+    </select>
+    <select id="selectAnswerByUId" resultType="cn.msq.weboj.object.Answer">
+        SELECT commitTime,isRight,questionPath,msg
+        FROM record,path
+        WHERE record.qId=path.id AND
+              uId=#{0}
+        ORDER BY commitTime DESC
+    </select>
+    <select id="getTestCasePathById" parameterType="java.lang.Integer"
+            resultType="java.lang.String">
+        SELECT testPath
+        FROM path
+        WHERE id=#{0}
+    </select>
+    <insert id="insertAnswer" parameterType="cn.msq.weboj.object.Answer">
+        INSERT INTO record(commitTime,isRight,msg,qId,uId)
+        VALUES (#{commitTime},#{isRight},#{msg},#{qId},#{uId})
+    </insert>
+</mapper>
